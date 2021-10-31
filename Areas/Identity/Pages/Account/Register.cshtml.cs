@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -60,6 +61,7 @@ namespace WEB_953505_Krasovskiy.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Display(Name = "Upload file")]
             public IFormFile Avatar { get; set; }
         }
 
@@ -75,13 +77,13 @@ namespace WEB_953505_Krasovskiy.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };                
                 if (Input.Avatar != null)
                 {
                     user.AvatarImage = new byte[(int)Input.Avatar.Length];
                     await Input.Avatar.OpenReadStream().ReadAsync(user.AvatarImage, 0, (int)Input.Avatar.Length);
                 }
+                var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
