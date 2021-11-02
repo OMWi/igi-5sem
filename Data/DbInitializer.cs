@@ -41,6 +41,39 @@ namespace WEB_953505_Krasovskiy.Data
                 await userManager.AddToRoleAsync(admin, "admin");
             }
 
+            if (!context.DishGroups.Any())
+            {
+                context.DishGroups.AddRange(
+                    new List<DishGroup>
+                    {
+                        new DishGroup {GroupName="Стартеры"},
+                        new DishGroup {GroupName="Салаты"},
+                        new DishGroup {GroupName="Супы"},
+                        new DishGroup {GroupName="Основные блюда"},
+                        new DishGroup {GroupName="Напитки"},
+                        new DishGroup {GroupName="Десерты"}
+                    });
+                await context.SaveChangesAsync();
+            }
+
+            if (!context.Dishes.Any())
+            {
+                context.Dishes.AddRange(
+                    new List<Dish>
+                    {
+                        new Dish {DishId=1, DishName="Суп-харчо", Description="Очень острый, невкусный",
+                            Calories=200, DishGroupId=3, Image="Суп.jpg"},
+                        new Dish {DishId=2, DishName="Борщ", Description="Много сала, без сметаны",
+                            Calories=330, DishGroupId=3, Image="Борщ.jpg"},
+                        new Dish {DishId=3, DishName="Котлета пожарская", Description="Хлеб - 80%, Морковь - 20%",
+                            Calories=635, DishGroupId=4, Image="Котлета.jpg"},
+                        new Dish {DishId=4, DishName="Макароны по-флотски", Description="С охотничьей колбаской",
+                            Calories=524, DishGroupId=4, Image="Макароны.jpg" },
+                        new Dish {DishId=5, DishName="Компот", Description="Быстро растворимый, 2 литра",
+                            Calories=180, DishGroupId=5, Image="Компот.jpg" }
+                    });
+                await context.SaveChangesAsync();
+            }
         }
     }
 }
