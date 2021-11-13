@@ -1,0 +1,60 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using WEB_953505_Krasovskiy.Entities;
+
+namespace WEB_953505_Krasovskiy.Models
+{
+    public class Cart
+    {
+        public Dictionary<int, CartItem> Items { get; set; }
+        public Cart()
+        {
+            Items = new Dictionary<int, CartItem>();
+        }
+
+        public int Count
+        {
+            get
+            {
+                return Items.Sum(item => item.Value.Quantity);
+            }
+        }
+
+        public int Calories
+        {
+            get
+            {
+                return Items.Sum(item => item.Value.Quantity *
+                item.Value.Dish.Calories);
+            }
+        }
+
+        public void AddToCart(Dish dish)
+        {
+            if (Items.ContainsKey(dish.DishId))
+                Items[dish.DishId].Quantity++;
+            else
+                Items.Add(dish.DishId, new CartItem
+                {
+                    Dish = dish,
+                    Quantity = 1
+                });
+        }
+
+        public void RemoveFromCart(int id)
+        {
+            Items.Remove(id);
+        }
+
+        public void ClearAll()
+        {
+            Items.Clear();
+        }        
+    }
+
+    public class CartItem
+    {
+        public Dish Dish { get; set; }
+        public int Quantity { get; set; }
+    }
+}

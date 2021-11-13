@@ -52,6 +52,12 @@ namespace WEB_953505_Krasovskiy
                 options.LoginPath = $"/Identity/Account/Login";
                 options.LogoutPath = $"/Identity/Account/Logout";
             });
+            services.AddDistributedMemoryCache();
+            services.AddSession(opt =>
+            {
+                opt.Cookie.HttpOnly = true;
+                opt.Cookie.IsEssential = true;
+            });
 
             services.AddAuthorization();
             services.AddControllersWithViews();
@@ -80,6 +86,7 @@ namespace WEB_953505_Krasovskiy
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseSession();
             app.UseAuthorization();
 
             DbInitializer.Seed(context, userManager, roleManager).Wait();
