@@ -29,7 +29,7 @@ namespace WEB_953505_Krasovskiy.Models
             }
         }
 
-        public void AddToCart(Dish dish)
+        public virtual void AddToCart(Dish dish)
         {
             if (Items.ContainsKey(dish.DishId))
                 Items[dish.DishId].Quantity++;
@@ -41,12 +41,12 @@ namespace WEB_953505_Krasovskiy.Models
                 });
         }
 
-        public void RemoveFromCart(int id)
+        public virtual void RemoveFromCart(int id)
         {
             Items.Remove(id);
         }
 
-        public void ClearAll()
+        public virtual void ClearAll()
         {
             Items.Clear();
         }        

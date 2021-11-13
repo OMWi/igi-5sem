@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -7,12 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WEB_953505_Krasovskiy.Data;
 using WEB_953505_Krasovskiy.Entities;
+using WEB_953505_Krasovskiy.Extensions;
+using WEB_953505_Krasovskiy.Models;
+using WEB_953505_Krasovskiy.Services;
 
 namespace WEB_953505_Krasovskiy
 {
@@ -58,6 +63,8 @@ namespace WEB_953505_Krasovskiy
                 opt.Cookie.HttpOnly = true;
                 opt.Cookie.IsEssential = true;
             });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<Cart>(sp => CartService.GetCart(sp));
 
             services.AddAuthorization();
             services.AddControllersWithViews();
@@ -67,8 +74,11 @@ namespace WEB_953505_Krasovskiy
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
                 ApplicationDbContext context, UserManager<ApplicationUser> userManager,
-                RoleManager<IdentityRole> roleManager)
+                RoleManager<IdentityRole> roleManager,
+                ILoggerFactory logger)
         {
+            logger.AddFile("Logs/log-{Date}.txt");
+            app.UseFileLogging();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

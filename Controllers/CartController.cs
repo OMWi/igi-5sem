@@ -16,9 +16,10 @@ namespace WEB_953505_Krasovskiy.Controllers
         private string cartKey = "cart";
         private Cart _cart;
 
-        public CartController(ApplicationDbContext context)
+        public CartController(ApplicationDbContext context, Cart cart)
         {
             _context = context;
+            _cart = cart;
         }
 
         public IActionResult Index()

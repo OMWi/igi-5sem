@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 using WEB_953505_Krasovskiy.Entities;
 using WEB_953505_Krasovskiy.Extensions;
 using WEB_953505_Krasovskiy.Models;
 using WEB_953505_Krasovskiy.Data;
+using Microsoft.Extensions.Logging;
 
 namespace WEB_953505_Krasovskiy.Controllers
 {
@@ -13,7 +13,8 @@ namespace WEB_953505_Krasovskiy.Controllers
         int _pageSize;
         ApplicationDbContext _context;
 
-        public ProductController(ApplicationDbContext context)
+        public ProductController(ApplicationDbContext context,
+                ILogger<ProductController> logger)
         {
             _pageSize = 3;
             _context = context;
