@@ -3,13 +3,21 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
+      "provider": "jsdelivr",
+      "library": "bs-custom-file-input@1.3.4",
+      "destination": "wwwroot/lib/bs-custom-file-input/"
+    },
+    {
       "library": "font-awesome@5.15.4",
       "destination": "wwwroot/lib/font-awesome/"
     },
     {
-      "provider": "jsdelivr",
-      "library": "bs-custom-file-input@1.3.4",
-      "destination": "wwwroot/lib/bs-custom-file-input/"
+      "library": "bootstrap@5.1.3",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "jquery@3.6.0",
+      "destination": "wwwroot/lib/jquery/"
     }
   ]
 }

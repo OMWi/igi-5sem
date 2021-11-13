@@ -23,8 +23,7 @@ namespace WEB_953505_Krasovskiy.Migrations
                 name: "Dishes",
                 columns: table => new
                 {
-                    DishId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DishId = table.Column<int>(type: "int", nullable: false),
                     DishName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Calories = table.Column<int>(type: "int", nullable: false),

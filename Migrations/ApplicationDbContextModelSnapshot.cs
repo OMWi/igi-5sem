@@ -221,9 +221,7 @@ namespace WEB_953505_Krasovskiy.Migrations
             modelBuilder.Entity("WEB_953505_Krasovskiy.Entities.Dish", b =>
                 {
                     b.Property<int>("DishId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("Calories")
                         .HasColumnType("int");
