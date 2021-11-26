@@ -30,7 +30,7 @@ namespace WEB_953505_Krasovskiy.Controllers
             }
             else
             {
-                var avatarPath = "/Images/anonymous.png";
+                var avatarPath = "/Images/anon.png";
                 return File(_env.WebRootFileProvider
                     .GetFileInfo(avatarPath)
                     .CreateReadStream(), "image/...");
