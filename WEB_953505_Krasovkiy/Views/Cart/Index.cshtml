@@ -33,6 +33,7 @@
                     <a asp-controller="Cart"
                        asp-action="Delete"
                        asp-route-id="@item.Dish.DishId"
+                       asp-route-returnurl="@ViewContext.HttpContext.Request.Path"
                        class="btn btn-outline-danger">
                         <i class="fas fa-trash-alt"></i>
                     </a>

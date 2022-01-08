@@ -40,5 +40,18 @@ namespace WEB_953505_Krasovskiy.Controllers
             }
             return Redirect(returnUrl);
         }
+
+        [Authorize]
+        public IActionResult Delete(int id, string returnUrl)
+        {
+            _cart = HttpContext.Session.Get<Cart>(cartKey);
+            var item = _context.Dishes.Find(id);
+            if (item != null)
+            {
+                _cart.RemoveFromCart(id);
+                HttpContext.Session.Set<Cart>(cartKey, _cart);
+            }
+            return Redirect(returnUrl);
+        }
     }
 }
